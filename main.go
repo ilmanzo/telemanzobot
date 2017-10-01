@@ -47,7 +47,7 @@ func temperatura() string {
 
 func usage(bot *telebot.Bot, message telebot.Message) {
 	bot.SendMessage(message.Chat,
-		"Hi, this is telemanzobot.\n"+
+		"Hi, this is Telemanzobot.\n"+
 			"Available commands:\n"+
 			"/hello\n"+
 			"/help\n"+
