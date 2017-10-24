@@ -12,7 +12,8 @@ import (
 	telebot "gopkg.in/tucnak/telebot.v1"
 )
 
-const APITOKEN = "PUT HERE YOUR OWN"
+// APITOKEN set the Telegram Token assigned to the Bot
+const APITOKEN = "PUT HERE YOUR OWN TOKEN"
 
 var bot *telebot.Bot
 
@@ -22,9 +23,9 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error connecting to telegram server: %v", err.Error())
 		return
-	} else {
-		bot = newBot
 	}
+
+	bot = newBot
 
 	bot.Messages = make(chan telebot.Message, 1000)
 	bot.Queries = make(chan telebot.Query, 1000)
@@ -52,11 +53,12 @@ func usage(bot *telebot.Bot, message telebot.Message) {
 			"/hello\n"+
 			"/help\n"+
 			"/temperatura [execute /usr/bin/sensors]\n"+
-			"/quit <password> [used for debugging]", nil)
+			"/quit <password> [used for debugging]",
+		nil)
 
 }
 
-//direct messages
+// handle direct messages
 func messages() {
 	for message := range bot.Messages {
 		switch message.Text {
@@ -89,16 +91,16 @@ func messages() {
 	}
 }
 
-//inline query
+// inline query
 func queries() {
 	for query := range bot.Queries {
 		fmt.Println("--- new query ---")
 		fmt.Println("from:", query.From)
 		fmt.Println("text:", query.Text)
 
-		//https://core.telegram.org/bots/api#inlinequeryresult
+		// https://core.telegram.org/bots/api#inlinequeryresult
 
-		//per ora fissi
+		// per ora fissi
 		results := []telebot.Result{
 			telebot.ArticleResult{Title: "risultato1", Text: "testo risultato 1"},
 			telebot.ArticleResult{Title: "risultato2", Text: "testo risultato 2"},
