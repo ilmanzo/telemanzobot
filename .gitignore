@@ -1,8 +1,21 @@
+# Local folders
+.vscode
+.local
+_old/
+
+# General files to exclude
+*.log
+*~*
+*.bak
+*.zip
+Thumbs.db
+
 # Binaries for programs and plugins
 *.exe
 *.dll
 *.so
 *.dylib
+debug
 
 # Test binary, build with `go test -c`
 *.test
