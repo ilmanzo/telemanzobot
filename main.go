@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tucnak/telebot"
+	telebot "gopkg.in/tucnak/telebot.v1"
 )
 
 const APITOKEN = "PUT HERE YOUR OWN"
