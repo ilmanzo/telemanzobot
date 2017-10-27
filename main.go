@@ -18,7 +18,9 @@ const APITOKEN = "PUT HERE YOUR OWN TOKEN"
 var bot *telebot.Bot
 
 func main() {
-	newBot, err := telebot.NewBot(APITOKEN)
+	token := apiToken()
+
+	newBot, err := telebot.NewBot(token)
 
 	if err != nil {
 		fmt.Printf("Error connecting to telegram server: %v", err.Error())
@@ -34,6 +36,14 @@ func main() {
 	go queries()
 	fmt.Println("Welcome to TELEgram manzobot. Starting listening for messages...")
 	bot.Start(1 * time.Second)
+}
+
+func apiToken() string {
+	token := os.Getenv("TELEGRAM_BOT_TOKEN")
+	if token == "" {
+		token = APITOKEN
+	}
+	return token
 }
 
 func temperatura() string {
@@ -61,6 +71,7 @@ func usage(bot *telebot.Bot, message telebot.Message) {
 // handle direct messages
 func messages() {
 	for message := range bot.Messages {
+		fmt.Println("Got message: " + message.Text)
 		switch message.Text {
 		case "/ciao":
 			bot.SendMessage(message.Chat,
